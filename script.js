@@ -16,6 +16,11 @@ class ParallaxTransition {
         this.setupScrollListener();
         this.setupImageObserver();
         this.update();
+        
+        const firstPageImg = document.querySelector('.page[data-page="0"] .page-content-image');
+        if (firstPageImg) {
+            setTimeout(() => firstPageImg.classList.add('visible'), 100);
+        }
     }
     
     setupScrollListener() {
