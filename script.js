@@ -4,6 +4,8 @@ class ParallaxTransition {
         this.whiteWipe = document.getElementById('whiteWipe');
         this.parallaxBgs = document.querySelectorAll('.parallax-bg');
         this.fixedTexts = document.querySelectorAll('.fixed-text');
+        this.textGroups = document.querySelectorAll('.text-group');
+        this.pageImages = document.querySelectorAll('.page-content-image');
         this.pages = document.querySelectorAll('.page');
         this.totalPages = this.pages.length;
         
@@ -12,6 +14,7 @@ class ParallaxTransition {
         this.textRange = 0.7;
         
         this.setupScrollListener();
+        this.setupImageObserver();
         this.update();
     }
     
@@ -29,6 +32,28 @@ class ParallaxTransition {
         });
     }
     
+    setupImageObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const img = entry.target.querySelector('.page-content-image');
+                if (img) {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+                        img.classList.add('visible');
+                    } else {
+                        img.classList.remove('visible');
+                    }
+                }
+            });
+        }, {
+            root: this.scrollContainer,
+            threshold: [0, 0.3, 0.5, 0.8, 1]
+        });
+        
+        this.pages.forEach((page) => {
+            observer.observe(page);
+        });
+    }
+    
     update() {
         const scrollY = this.scrollContainer.scrollTop;
         const pageHeight = window.innerHeight;
@@ -36,6 +61,7 @@ class ParallaxTransition {
         
         this.updateParallax(progress);
         this.updateFixedText(progress);
+        this.updateTextGroups(progress);
     }
     
     updateParallax(progress) {
@@ -69,6 +95,26 @@ class ParallaxTransition {
             
             textEl.style.opacity = opacity;
             textEl.style.transform = `translate(0, calc(-50% + ${yOffset}px))`;
+        });
+    }
+    
+    updateTextGroups(progress) {
+        this.textGroups.forEach((groupEl) => {
+            const groupIndex = parseInt(groupEl.dataset.groupIndex);
+            const localProgress = progress - groupIndex;
+            const absProgress = Math.abs(localProgress);
+            
+            if (absProgress >= this.textRange) {
+                groupEl.style.opacity = '0';
+                groupEl.style.transform = 'translate(0, -50%)';
+                return;
+            }
+            
+            const opacity = 1 - (absProgress / this.textRange);
+            const yOffset = -localProgress * (this.textParallaxAmount / this.textRange);
+            
+            groupEl.style.opacity = opacity;
+            groupEl.style.transform = `translate(0, calc(-50% + ${yOffset}px))`;
         });
     }
 }

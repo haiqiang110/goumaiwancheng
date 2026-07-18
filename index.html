@@ -16,24 +16,37 @@
         <div class="parallax-bg" data-index="1">
             <video src="canting.webm?v=2" muted loop playsinline autoplay></video>
             <img src="zhezhao.png" class="mask-overlay" alt="mask">
-            <img src="daodian.png" class="page-image" alt="daodian">
         </div>
         <div class="parallax-bg" data-index="2">
             <video src="home.webm?v=2" muted loop playsinline autoplay></video>
             <img src="zhezhao.png" class="mask-overlay" alt="mask">
-            <img src="daojia.png" class="page-image" alt="daojia">
         </div>
     </div>
 
     <div class="fixed-texts" id="fixedTexts">
         <div class="fixed-text" data-text-index="1">NOW</div>
-        <div class="fixed-text" data-text-index="2">NOWM</div>
+        <div class="fixed-text" data-text-index="2">NOW</div>
+    </div>
+
+    <div class="fixed-text-groups" id="fixedTextGroups">
+        <div class="text-group" data-group-index="1">
+            <div class="text-row text-row-1">保留凭证</div>
+            <div class="text-row text-row-2">方便快速核销</div>
+        </div>
+        <div class="text-group" data-group-index="2">
+            <div class="text-row text-row-1">不展示核销凭证</div>
+            <div class="text-row text-row-2">继续逛更多</div>
+        </div>
     </div>
     
     <div class="scroll-container" id="scrollContainer">
         <section class="page" data-page="0"></section>
-        <section class="page" data-page="1"></section>
-        <section class="page" data-page="2"></section>
+        <section class="page" data-page="1">
+            <img src="daodian.png" class="page-content-image" alt="daodian">
+        </section>
+        <section class="page" data-page="2">
+            <img src="daojia.png" class="page-content-image" alt="daojia">
+        </section>
     </div>
     
     <script src="script.js"></script>
