@@ -64,6 +64,20 @@ body {
     will-change: auto !important;
 }
 
+.page-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    max-height: 70%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    z-index: 2;
+    will-change: transform, opacity;
+}
+
 .fixed-texts {
     position: fixed;
     top: 0;
